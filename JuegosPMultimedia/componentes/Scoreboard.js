@@ -5,16 +5,16 @@ export class Scoreboard {
   }
 
   create() {
-    this.scoreText = this.relatedScene.add.text(16, 16, "PUNTOS: 0", {
-      fontSize: "20px",
-      fill: "#fff",
-      fontFamily: "verdana,arial,sans-serif",
+    this.scoreText = this.relatedScene.add.text(16, 16, "0 PUNTOS", {
+      fontSize: "bold 20px",
+      fill: "#8B0000",
+      fontFamily: "verdana,arial,sans-serif"
     });
   }
 
   incrementPoints(points){
     this.score += points;
-    this.scoreText.setText(this.score + " CERVEZAS GITANAS");
+    this.scoreText.setText(this.score + " PUNTOS");
   }
 
 
