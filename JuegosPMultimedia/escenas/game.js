@@ -15,6 +15,7 @@ export class Game extends Phaser.Scene {
     this.load.image("platform", "images/jugador-de-baloncesto (2).png");
     this.load.image("ball", "images/icons8-baloncesto-48.png");
     this.load.image("brick", "images/icons8-red-de-canasta-64 (1).png");
+    //this.load.audio('backgroundMusic', 'audio/musica.mp3');
 
   }
 
@@ -63,7 +64,14 @@ export class Game extends Phaser.Scene {
     );
     this.ball.setBounce(1);
     this.cursors = this.input.keyboard.createCursorKeys();
+/*
+    this.music = this.sound.add('backgroundMusic', {
+      volume: 0.5,   // Volumen (0 a 1)
+      loop: true     // Para que se repita en bucle
+  });
 
+  this.music.play();
+*/
 
   }
 

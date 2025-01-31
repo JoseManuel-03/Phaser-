@@ -15,5 +15,6 @@ export class Congratulations extends Phaser.Scene {
         this.add.image(410,250, 'background');
         this.restartButton.create();
         this.congratsImage =this.add.image(400,90, 'congratulations')
+        //this.scene.get('game').music.stop();  /
     }
 }
