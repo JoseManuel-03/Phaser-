@@ -10,12 +10,19 @@ export class Gameover extends Phaser.Scene {
     preload(){
         this.load.image('gameover', 'images/gameover.png');
         this.restartButton.preload()
+        this.load.audio('looseMusic', 'audio/mixkit-player-losing-or-failing-2042.wav');
     }
 
     create(){
         this.add.image(410,250, 'background');
         this.restartButton.create();
         this.gameoverImage = this.add.image(400,90, 'gameover');
-        //this.scene.get('game').music.stop();  
+        this.scene.get('game').music.stop();  
+        this.music = this.sound.add('looseMusic', {
+            volume: 0.6,   
+         
+        });
+      
+        this.music.play();
     }
 }

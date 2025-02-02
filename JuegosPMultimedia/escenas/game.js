@@ -4,10 +4,12 @@ import { Scoreboard } from "../componentes/Scoreboard";
 export class Game extends Phaser.Scene {
   constructor() {
     super({ key: "game" });
+    this.timer = 24; 
   }
 
   init() {
     this.scoreboard = new Scoreboard(this)
+    this.timer = 24;
   }
 
   preload() {
@@ -15,7 +17,9 @@ export class Game extends Phaser.Scene {
     this.load.image("platform", "images/jugador-de-baloncesto (2).png");
     this.load.image("ball", "images/icons8-baloncesto-48.png");
     this.load.image("brick", "images/icons8-red-de-canasta-64 (1).png");
-    //this.load.audio('backgroundMusic', 'audio/musica.mp3');
+    this.load.image('bomb', 'images/bomba-nuclear (1) (1).png');
+    this.load.audio('backgroundMusic', 'audio/mixkit-hazy-after-hours-132.mp3');
+    this.load.audio('puntosMusic', 'audio/mixkit-basketball-ball-hitting-the-net-2084.wav');
 
   }
 
@@ -23,6 +27,40 @@ export class Game extends Phaser.Scene {
     this.physics.world.setBoundsCollision(true, true, true, false);
     this.add.image(400, 250, "background");
     this.scoreboard.create();
+    this.timerTextLeft = this.add.text(1, 80, `${this.timer}`, { 
+      fontSize: "30px",
+      fill: "#ff0000", 
+      fontFamily: "Arial",
+      fontStyle: "bold",
+      stroke: "#ff6666", 
+      strokeThickness: 6,
+      shadow: {
+        offsetX: 3,
+        offsetY: 3,
+        color: "#ff3333",
+        blur: 8,
+        stroke: true,
+        fill: true,
+      },
+    });
+    
+    this.timerTextRight = this.add.text(760, 80, `${this.timer}`, { 
+      fontSize: "30px",
+      fill: "#ff0000", 
+      fontFamily: "Arial",
+      fontStyle: "bold",
+      stroke: "#ff6666", 
+      strokeThickness: 6,
+      shadow: {
+        offsetX: 3,
+        offsetY: 3,
+        color: "#ff3333",
+        blur: 8,
+        stroke: true,
+        fill: true,
+      },
+    });
+    
 
 
 
@@ -64,15 +102,46 @@ export class Game extends Phaser.Scene {
     );
     this.ball.setBounce(1);
     this.cursors = this.input.keyboard.createCursorKeys();
-/*
+
+    this.time.addEvent({
+      delay: 1000, 
+      callback: this.updateTimer,
+      callbackScope: this,
+      loop: true,
+    });
+
     this.music = this.sound.add('backgroundMusic', {
-      volume: 0.5,   // Volumen (0 a 1)
-      loop: true     // Para que se repita en bucle
+      volume: 0.1,   
+      loop: true     
   });
 
   this.music.play();
-*/
+  this.bombs = this.physics.add.group();
+  this.physics.add.collider(this.platform, this.bombs, this.hitBomb, null, this);
 
+
+  }
+
+  createBomb(x, y) {
+    let bomb = this.bombs.create(x, y, 'bomb'); 
+    bomb.setVelocity(0, 200);
+    bomb.setCollideWorldBounds(true);
+}
+
+hitBomb(platform, bomb) {
+  this.scene.start('gameover');
+}
+
+
+  updateTimer() {
+    this.timer--; 
+
+    this.timerTextLeft.setText(`${this.timer}`);
+    this.timerTextRight.setText(`${this.timer}`);
+
+    if (this.timer <= 0) {
+      this.showGameOver();
+    }
   }
 
   update() {
@@ -142,12 +211,21 @@ export class Game extends Phaser.Scene {
         ball.setVelocityX(10 * relativeImpact);
       }
     }
+
+    
   }
 
 
   brickImpact(ball, brick) {
     this.scoreboard.incrementPoints(1);
     brick.disableBody(true, true);
+    this.music = this.sound.add('puntosMusic', {
+      volume: 0.8,   
+   
+  });
+
+  this.music.play();
+  this.createBomb(brick.x, brick.y);
 
     if (this.miGrupo.countActive() === 0) {
       this.showCongratulations()
