@@ -18,7 +18,7 @@ export class Game extends Phaser.Scene {
     this.load.image("ball", "images/icons8-baloncesto-48.png");
     this.load.image("brick", "images/icons8-red-de-canasta-64 (1).png");
     this.load.image('bomb', 'images/bomba-nuclear (1) (1).png');
-    this.load.audio('backgroundMusic', 'audio/mixkit-hazy-after-hours-132.mp3');
+    this.load.audio('backgroundMusic', 'audio/NBA Sound.mp3');
     this.load.audio('puntosMusic', 'audio/mixkit-basketball-ball-hitting-the-net-2084.wav');
 
   }
@@ -110,12 +110,14 @@ export class Game extends Phaser.Scene {
       loop: true,
     });
 
-    this.music = this.sound.add('backgroundMusic', {
-      volume: 0.1,   
-      loop: true     
-  });
 
-  this.music.play();
+    this.sound.stopAll();  // 💥 Esto detiene todos los sonidos que puedan estar sonando
+    this.sound.removeByKey('backgroundMusic'); 
+    this.music = this.sound.add('backgroundMusic', {
+        volume: 0.1,
+        loop: true    
+    });
+    this.music.play();
   this.bombs = this.physics.add.group();
   this.physics.add.collider(this.platform, this.bombs, this.hitBomb, null, this);
 
@@ -180,13 +182,15 @@ hitBomb(platform, bomb) {
 
 
   showGameOver() {
-    this.scene.start('gameover');
-  }
+  this.sound.stopAll(); 
+  
+  this.scene.start('gameover');
+}
 
   showCongratulations() {
-    this.scene.start('congratulations');
-  }
-
+  this.sound.stopAll(); 
+  this.scene.start('congratulations');
+}
   ejecutar() {
     console.log("Ha chocado");
     this.ball.setVelocity(10, -800);
