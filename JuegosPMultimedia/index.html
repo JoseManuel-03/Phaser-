@@ -1,16 +1,66 @@
 <!DOCTYPE html>
-<HTML LANG="ES">
-    <HEAD>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> Mi primer juego</title>
-    </HEAD>
-    <body>
-        <h1 style="color: #8B0000";>
-            <img src="images/logo_ceu.png" alt="Logo CEU" style="height: 60px; margin-left: 10px;">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi primer juego</title>
+    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('images/dark-wood-flooring.jpg');
+            background-position: center
+        }
+
+        #header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #d8c0a1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        img {
+            height: 60px;
+        }
+
+        #game-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Contenedor del título y logo -->
+    <div id="header">
+        <h1>
+            <img src="images/9ad85fcab6d5cf9b10f2ce6534da9de8_400x400.png" alt="Logo CEU">
             BASQUETBALL REAL GAME
         </h1>
+    </div>
+
+    <!-- Contenedor del juego -->
+    <div id="game-container">
         <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.js"></script>
         <script type="module" src="index.js"></script>
-    </body>
-</HTML>
+    </div>
+
+</body>
+</html>

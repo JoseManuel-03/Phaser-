@@ -111,7 +111,7 @@ export class Game extends Phaser.Scene {
     });
 
 
-    this.sound.stopAll();  // 💥 Esto detiene todos los sonidos que puedan estar sonando
+    this.sound.stopAll(); 
     this.sound.removeByKey('backgroundMusic'); 
     this.music = this.sound.add('backgroundMusic', {
         volume: 0.1,
