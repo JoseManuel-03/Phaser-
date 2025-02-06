@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mi primer juego</title>
+   
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Mi primer juego</title> <!-- Título que aparecerá en la pestaña del navegador -->
     
     <style>
+        /* Estilos generales de la página */
         body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
             height: 100vh;
-            margin: 0;
-            background-image: url('images/dark-wood-flooring.jpg');
-            background-position: center
+            margin: 0; 
+            background-image: url('images/dark-wood-flooring.jpg'); /* Fondo con imagen de madera */
+            background-position: center; 
         }
 
+        /* Estilos del contenedor del título y logo */
         #header {
-            text-align: center;
-            margin-bottom: 40px;
+            text-align: center; 
+            margin-bottom: 40px; /* Agrega espacio entre el título y el juego */
         }
 
+        /* Estilos del título */
         h1 {
-            color: #d8c0a1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            color: #d8c0a1; /* Color marrón claro para que combine con el fondo */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; /* Espacio entre el logo y el texto */
         }
 
+        /* Estilos de la imagen (logo) */
         img {
             height: 60px;
         }
 
+        /* Contenedor del juego */
         #game-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; 
+            align-items: center; 
         }
 
+        /* Estilos del canvas (lienzo del juego) */
         canvas {
             display: block;
         }
@@ -51,14 +58,18 @@
     <!-- Contenedor del título y logo -->
     <div id="header">
         <h1>
+            <!-- Imagen del logo -->
             <img src="images/9ad85fcab6d5cf9b10f2ce6534da9de8_400x400.png" alt="Logo CEU">
-            BASQUETBALL REAL GAME
+            BASQUETBALL REAL GAME <!-- Título del juego -->
         </h1>
     </div>
 
-    <!-- Contenedor del juego -->
+    <!-- Contenedor donde se mostrará el juego -->
     <div id="game-container">
+ 
         <script src="//cdn.jsdelivr.net/npm/phaser@3.24.0/dist/phaser.js"></script>
+        
+        <!-- Importamos el archivo JavaScript donde estará el código del juego -->
         <script type="module" src="index.js"></script>
     </div>
 
